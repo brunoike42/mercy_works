@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Donate{% endblock %}
+{% block content %}
+<div class="page-header text-center">
+  <h2 style="font-family:'Playfair Display',serif;"><i class="bi bi-heart-fill me-2"></i>Make a Donation</h2>
+  <p class="opacity-75">Your generosity transforms lives</p>
+</div>
+<div class="container py-5">
+  <div class="row g-5 justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header py-3 text-center">
+          <h5 class="mb-0">
+            {% if cause %}Donate to: {{ cause.title }}{% else %}General Donation{% endif %}
+          </h5>
+        </div>
+        <div class="card-body p-4">
+          {% if cause %}
+          <div class="alert alert-success mb-3">
+            <div class="d-flex justify-content-between mb-1 small">
+              <span>Raised: UGX {{ cause.raised_amount|floatformat:0 }}</span>
+              <span>{{ cause.progress_percent }}%</span>
+            </div>
+            <div class="progress" style="height:8px;">
+              <div class="progress-bar" style="width:{{ cause.progress_percent }}%;"></div>
+            </div>
+            <small>Goal: UGX {{ cause.goal_amount|floatformat:0 }}</small>
+          </div>
+          {% endif %}
+          <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-secondary w-100 py-2 mt-2">
+              <i class="bi bi-heart me-2"></i>Confirm Donation
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-0" style="background:var(--mw-light);">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3" style="color:var(--mw-primary);">Why Your Donation Matters</h5>
+          <div class="d-flex mb-3">
+            <i class="bi bi-heart-pulse fs-4 me-3" style="color:var(--mw-secondary);"></i>
+            <div><strong>Healthcare</strong><p class="text-muted small mb-0">Fund medical outreach to rural communities</p></div>
+          </div>
+          <div class="d-flex mb-3">
+            <i class="bi bi-book fs-4 me-3" style="color:var(--mw-secondary);"></i>
+            <div><strong>Education</strong><p class="text-muted small mb-0">Support scholarships and learning programs</p></div>
+          </div>
+          <div class="d-flex mb-3">
+            <i class="bi bi-basket fs-4 me-3" style="color:var(--mw-secondary);"></i>
+            <div><strong>Food Relief</strong><p class="text-muted small mb-0">Feed families in need across Uganda</p></div>
+          </div>
+          <div class="d-flex">
+            <i class="bi bi-house-heart fs-4 me-3" style="color:var(--mw-secondary);"></i>
+            <div><strong>Shelter</strong><p class="text-muted small mb-0">Build safe homes for the vulnerable</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

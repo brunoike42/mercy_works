@@ -1,0 +1,4 @@
+from django.contrib import admin
+from .models import Donation, ContactSubmission
+admin.site.register(Donation)
+admin.site.register(ContactSubmission)
