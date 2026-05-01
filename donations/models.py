@@ -1,33 +1,34 @@
 from django.db import models
-from causes.models import Cause
-from accounts.models import CustomUser
+from django.conf import settings
 
 class Donation(models.Model):
-    donor = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
-    cause = models.ForeignKey(Cause, on_delete=models.SET_NULL, null=True, blank=True, related_name='donations')
-    donor_name = models.CharField(max_length=100)
-    donor_email = models.EmailField()
-    amount = models.DecimalField(max_digits=12, decimal_places=2)
+    FREQUENCY_CHOICES = [
+        ('once', 'One Time'),
+        ('weekly', 'Weekly'),
+        ('monthly', 'Monthly'),
+        ('yearly', 'Yearly'),
+    ]
+    donor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
+    name = models.CharField(max_length=200, blank=True)
+    email = models.EmailField(blank=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    frequency = models.CharField(max_length=20, choices=FREQUENCY_CHOICES, default='once')
+    cause = models.ForeignKey('causes.Cause', on_delete=models.SET_NULL, null=True, blank=True)
     message = models.TextField(blank=True)
-    is_anonymous = models.BooleanField(default=False)
+    is_confirmed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if self.cause:
-            self.cause.raised_amount = sum(d.amount for d in self.cause.donations.all())
-            self.cause.save()
+    def __str__(self):
+        return f"${self.amount} by {self.name or self.email}"
 
-    def __str__(self): return f"{self.donor_name} - UGX {self.amount}"
-    class Meta: ordering = ['-created_at']
 
 class ContactSubmission(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=200)
     email = models.EmailField()
-    subject = models.CharField(max_length=200)
+    subject = models.CharField(max_length=300, blank=True)
     message = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
     is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self): return f"{self.name} - {self.subject}"
-    class Meta: ordering = ['-created_at']
+    def __str__(self):
+        return f"{self.name} - {self.subject}"

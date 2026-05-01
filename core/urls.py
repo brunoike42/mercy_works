@@ -9,6 +9,9 @@ from drf_yasg import openapi
 from causes.models import Cause
 from events.models import Event
 from blog.models import Post
+from .models import HeroImage
+
+admin.site.register(HeroImage)
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -26,15 +29,28 @@ def home(request):
     causes = Cause.objects.filter(is_active=True, is_featured=True)[:3]
     if causes.count() < 3:
         causes = Cause.objects.filter(is_active=True)[:3]
+
     events = Event.objects.filter(is_active=True)[:3]
     posts = Post.objects.filter(is_published=True)[:3]
-    return render(request, 'home.html', {'causes': causes, 'events': events, 'posts': posts})
 
+    hero_images = HeroImage.objects.filter(is_active=True)
+
+    return render(request, 'home.html', {
+        'causes': causes,
+        'events': events,
+        'posts': posts,
+        'hero_images': hero_images,
+    })
+    
 def about(request):
     return render(request, 'about.html')
 
+def contact(request):
+    return render(request, 'contact.html')
+
 def services(request):
     services_default = [
+        
         ('heart-pulse','Medical Outreach','Free medical camps and healthcare services to rural communities'),
         ('book','Education Support','Scholarships and school supply programs for underprivileged children'),
         ('basket','Food Relief','Feeding programs and nutritional support for vulnerable families'),
@@ -42,13 +58,16 @@ def services(request):
         ('droplet','Clean Water','Borehole drilling and water sanitation projects'),
         ('people','Community Development','Skills training and economic empowerment programs'),
     ]
+    
     return render(request, 'services.html', {'services_default': services_default})
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('about/', about, name='about'),
     path('services/', services, name='services'),
+    path('contact/', contact, name='contact'),
     path('accounts/', include('accounts.urls')),
     path('causes/', include('causes.urls')),
     path('events/', include('events.urls')),

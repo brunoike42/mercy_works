@@ -1,8 +1,11 @@
 from rest_framework import serializers
-from .models import Cause
-
+from .models import Cause, Category
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
 class CauseSerializer(serializers.ModelSerializer):
-    progress_percent = serializers.IntegerField(read_only=True)
+    progress_percent = serializers.ReadOnlyField()
     class Meta:
         model = Cause
-        fields = ['id','title','description','image','goal_amount','raised_amount','progress_percent','is_active','is_featured','created_at']
+        fields = '__all__'

@@ -1,17 +1,13 @@
 from rest_framework import generics, permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from .models import CustomUser
-from .serializers import UserSerializer
-
-class IsAdminRole(permissions.BasePermission):
-    def has_permission(self, request, view):
-        return request.user.is_authenticated and request.user.role == 'admin'
-
-class UserListView(generics.ListAPIView):
+from .serializers import UserSerializer, RegisterSerializer
+class RegisterView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [IsAdminRole]
-
-class ProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = RegisterSerializer
+    permission_classes = [permissions.AllowAny]
+class UserProfileView(generics.RetrieveUpdateAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
     def get_object(self):

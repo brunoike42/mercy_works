@@ -1,10 +1,9 @@
 from django.urls import path
-from . import views
+from . import api_views
+
 urlpatterns = [
-    path('donate/', views.donate, name='donate'),
-    path('donate/<int:cause_id>/', views.donate, name='donate_cause'),
-    path('contact/', views.contact, name='contact'),
-    path('manage/', views.manage_donations, name='manage_donations'),
-    path('messages/', views.manage_messages, name='manage_messages'),
-    path('messages/<int:pk>/read/', views.mark_message_read, name='mark_message_read'),
+    path('', api_views.DonationListCreateView.as_view(), name='donate'),
+    path('cause/<int:cause_id>/', api_views.DonationListCreateView.as_view(), name='donate_cause'),
+    path('<int:pk>/', api_views.DonationDetailView.as_view(), name='donation_detail'),
+    path('contact/', api_views.ContactSubmissionListCreateView.as_view(), name='contact_list'),
 ]

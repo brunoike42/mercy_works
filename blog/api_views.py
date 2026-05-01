@@ -1,14 +1,11 @@
 from rest_framework import generics, permissions
-from .models import Post, Category
-from .serializers import PostSerializer, CategorySerializer
-
-class PostListView(generics.ListAPIView):
-    queryset = Post.objects.filter(is_published=True)
-    serializer_class = PostSerializer
+from .models import BlogPost, BlogCategory
+from .serializers import BlogPostSerializer, BlogCategorySerializer
+class BlogPostListCreateView(generics.ListCreateAPIView):
+    queryset = BlogPost.objects.filter(is_published=True)
+    serializer_class = BlogPostSerializer
     permission_classes = [permissions.AllowAny]
-
-class PostDetailView(generics.RetrieveAPIView):
-    queryset = Post.objects.filter(is_published=True)
-    serializer_class = PostSerializer
-    permission_classes = [permissions.AllowAny]
-    lookup_field = 'slug'
+class BlogPostDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = BlogPost.objects.all()
+    serializer_class = BlogPostSerializer
+    permission_classes = [permissions.IsAdminUser]
