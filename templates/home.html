@@ -3,6 +3,10 @@
 {% block content %}
 
 <style>
+    .counter {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+}
 
 .hero-section {
     height: 90vh;
@@ -48,7 +52,39 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.4); /* transparency */
 }
+/* SCROLL ANIMATIONS */
+.reveal {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s ease;
+}
 
+.reveal-left {
+    transform: translateX(-60px);
+}
+
+.reveal-right {
+    transform: translateX(60px);
+}
+
+.reveal-zoom {
+    transform: scale(0.85);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+}
+.text-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.text-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
 </style>
 <!-- Hero -->
 <!-- Hero -->
@@ -85,7 +121,7 @@
 </div>
 
 <!-- Stats -->
-<div class="py-4" style="background: var(--mw-primary);">
+<div class="py-4 reveal" style="background: var(--mw-primary);">
     <div class="container">
         <div class="row text-white text-center g-3">
             <div class="col-6 col-md-3">
@@ -112,10 +148,10 @@
 <div class="py-5" style="background: var(--mw-light);">
     <div class="container">
         <div class="row align-items-center g-5">
-            <div class="col-md-6">
-                <p class="text-uppercase fw-bold" style="color: var(--mw-secondary); letter-spacing:2px;">About Us</p>
-                <h2 class="section-title mb-3">Faith Children's Orphanage</h2>
-                <p class="text-muted">Faith Children’s Orphanage Uganda was founded with a simple but heartfelt purpose: to respond to the growing need for care and protection of vulnerable children in our community.
+            <div class="col-md-6    reveal">
+                <p class="text-uppercase fw-bold " style="color: var(--mw-secondary); letter-spacing:2px;" >About Us</p>
+                <h2 class="section-title mb-3 ">Faith Children's Orphanage</h2>
+                <p class="text-muted" text-reveal>Faith Children’s Orphanage Uganda was founded with a simple but heartfelt purpose: to respond to the growing need for care and protection of vulnerable children in our community.
 
 What started as a small effort to help a few children has grown into a mission that continues to touch many lives.
 
@@ -125,31 +161,31 @@ And that is exactly what we strive to give.</p>
                 <p class="text-muted">Our Mission is to provide a safe, nurturing, and loving home for orphaned and vulnerable children by meeting their physical, emotional, and educational needs, while empowering them to grow into confident, independent, and hopeful individuals.</p>
                 <a href="{% url 'about' %}" class="btn btn-primary mt-2">Learn More</a>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 reveal ">
                 <div class="row g-3">
                     <div class="col-6">
-                        <div class="card p-3 text-center h-100">
+                        <div class="card p-3 text-center h-100 reveal reveal-left">
                             <i class="bi bi-heart-pulse fs-1 mb-2" style="color: var(--mw-primary);"></i>
                             <h6 class="fw-bold">Healthcare</h6>
                             <small class="text-muted">Medical outreach to Orphans in Community</small>
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="card p-3 text-center h-100">
+                        <div class="card p-3 text-center h-100 reveal reveal-right">
                             <i class="bi bi-book fs-1 mb-2" style="color: var(--mw-primary);"></i>
                             <h6 class="fw-bold">Education</h6>
                             <small class="text-muted">Scholarships and learning support for the Children</small>
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="card p-3 text-center h-100">
+                        <div class="card p-3 text-center h-100 reveal reveal-left">
                             <i class="bi bi-house-heart fs-1 mb-2" style="color: var(--mw-primary);"></i>
                             <h6 class="fw-bold">Shelter</h6>
                             <small class="text-muted">Safe homes for the vulnerable</small>
                         </div>
                     </div>
                     <div class="col-6">
-                        <div class="card p-3 text-center h-100">
+                        <div class="card p-3 text-center h-100 reveal reveal-right">
                             <i class="bi bi-basket fs-1 mb-2" style="color: var(--mw-primary);"></i>
                             <h6 class="fw-bold">Food Relief</h6>
                             <small class="text-muted">Feeding programs and nutrition</small>
@@ -170,7 +206,7 @@ And that is exactly what we strive to give.</p>
         </div>
         <div class="row g-4">
             {% for cause in causes %}
-            <div class="col-md-4">
+           <div class="col-md-4 reveal">
                 <div class="card cause-card h-100">
                     {% if cause.image %}
                     <img src="{{ cause.image.url }}" class="card-img-top" style="height:220px; object-fit:cover;" alt="{{ cause.title }}">
@@ -232,7 +268,7 @@ And that is exactly what we strive to give.</p>
         </div>
         <div class="row g-4">
             {% for event in events %}
-            <div class="col-md-4">
+           <div class="col-md-4 reveal reveal-zoom">
                 <div class="card h-100">
                     {% if event.image %}
                     <img src="{{ event.image.url }}" class="card-img-top" style="height:200px; object-fit:cover;">
@@ -270,7 +306,7 @@ And that is exactly what we strive to give.</p>
         </div>
         <div class="row g-4">
             {% for post in posts %}
-            <div class="col-md-4">
+            <div class="col-md-4 reveal">
                 <div class="card h-100">
                     {% if post.image %}
                     <img src="{{ post.image.url }}" class="card-img-top" style="height:200px; object-fit:cover;">
@@ -290,7 +326,7 @@ And that is exactly what we strive to give.</p>
 {% endif %}
 
 <!-- Volunteer CTA -->
-<div class="py-5" style="background: var(--mw-dark); color:#fff;">
+<div class="py-5 reveal" style="background: var(--mw-dark); color:#fff;">
     <div class="container text-center">
         <h2 class="fw-bold mb-2" style="font-family:'Playfair Display',serif;">Become a Volunteer</h2>
         <p class="mb-4 opacity-75">Join our community of changemakers and make a real difference.</p>
