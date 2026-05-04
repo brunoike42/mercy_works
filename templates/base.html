@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --mw-primary: #1a6b3c;
+            --mw-primary: #1F7A63;
             --mw-secondary: #e8a020;
             --mw-dark: #0d3d22;
             --mw-light: #f4faf7;
@@ -224,38 +224,6 @@ function updateHero() {
 updateHero();
 setInterval(updateHero, 5000);
 </script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const counters = document.querySelectorAll('.counter');
-
-    function animate(counter) {
-        const target = +counter.getAttribute('data-target');
-        let count = 0;
-
-        const step = target / 200;
-
-        function update() {
-            count += step;
-
-            if (count < target) {
-                counter.innerText = Math.ceil(count);
-                requestAnimationFrame(update);
-            } else {
-                counter.innerText = target + '+';
-            }
-        }
-
-        update();
-    }
-
-    counters.forEach(counter => {
-        counter.innerText = "0";
-        animate(counter);
-    });
-
-});
-
-</script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -288,6 +256,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+</script>
+
+<script>
 document.addEventListener("DOMContentLoaded", function () {
 
   const reveals = document.querySelectorAll('.reveal');
@@ -310,25 +281,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
 
-    const reveals = document.querySelectorAll('.reveal');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, {
-        threshold: 0.15
-    });
-
-    reveals.forEach(el => observer.observe(el));
-
-});
-</script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -371,6 +324,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
+<script src="bootstrap..."></script>
 
+<script> ... hero slider ... </script>
+<script> ... counter ... </script>
+<script> ... reveal ... </script>
+
+
+</body>
+</html>
 </body>
 </html>
