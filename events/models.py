@@ -14,5 +14,16 @@ class Event(models.Model):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-start_date', '-start_time']
+
+    @property
+    def date(self):
+        return self.start_date
+
+    @property
+    def time(self):
+        return self.start_time
+
     def __str__(self):
         return self.title

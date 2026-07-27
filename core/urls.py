@@ -30,7 +30,7 @@ def home(request):
     if causes.count() < 3:
         causes = Cause.objects.filter(is_active=True)[:3]
 
-    events = Event.objects.filter(is_active=True)[:3]
+    events = Event.objects.filter(is_active=True).order_by('-start_date', '-start_time')[:3]
     posts = Post.objects.filter(is_published=True)[:3]
 
     hero_images = HeroImage.objects.filter(is_active=True)
@@ -44,9 +44,6 @@ def home(request):
     
 def about(request):
     return render(request, 'about.html')
-
-def contact(request):
-    return render(request, 'contact.html')
 
 def services(request):
     services_default = [
@@ -67,7 +64,7 @@ urlpatterns = [
     path('', home, name='home'),
     path('about/', about, name='about'),
     path('services/', services, name='services'),
-    path('contact/', contact, name='contact'),
+    path('contact/', include('donations.urls')),  # Contact is handled by donations app
     path('accounts/', include('accounts.urls')),
     path('causes/', include('causes.urls')),
     path('events/', include('events.urls')),

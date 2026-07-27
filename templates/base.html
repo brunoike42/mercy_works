@@ -76,7 +76,9 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'cause_list' %}">Causes</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'event_list' %}">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'child_list' %}">Our Children</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'post_list' %}">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'donate' %}">Donate</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'opportunity_list' %}">Volunteer</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
@@ -190,7 +192,8 @@ function updateHero() {
 
 updateHero();
 setInterval(updateHero, 5000);
-<>
+</script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
 
     const counters = document.querySelectorAll('.counter');

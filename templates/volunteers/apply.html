@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 {% block title %}Apply - {{ opportunity.title }}{% endblock %}
 {% block content %}
 <div class="page-header">
@@ -16,7 +15,30 @@
         <div class="card-body p-4">
           <form method="post">
             {% csrf_token %}
-            {{ form|crispy }}
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+              <input type="text" name="full_name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <input type="text" name="phone" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Skills</label>
+              <textarea name="skills" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Availability</label>
+              <input type="text" name="availability" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea name="message" class="form-control" rows="4"></textarea>
+            </div>
             <button type="submit" class="btn btn-secondary w-100 py-2">
               <i class="bi bi-send me-2"></i>Submit Application
             </button>
@@ -33,6 +55,11 @@
           <hr>
           <h6 class="fw-bold">Requirements</h6>
           <p class="text-muted small">{{ opportunity.requirements }}</p>
+          {% endif %}
+          {% if opportunity.perks %}
+          <hr>
+          <h6 class="fw-bold">What You Gain</h6>
+          <p class="text-muted small">{{ opportunity.perks }}</p>
           {% endif %}
           <hr>
           <p><i class="bi bi-geo-alt me-2" style="color:var(--mw-secondary);"></i>{{ opportunity.location }}</p>

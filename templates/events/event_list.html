@@ -20,13 +20,13 @@ Join us and be part of something truly life-changing.</p>
         <div class="card-body">
           <div class="d-flex align-items-start mb-3">
             <div class="text-center p-2 me-3 rounded" style="background:var(--mw-primary);color:#fff;min-width:55px;">
-              <div class="fw-bold fs-4">{{ event.date|date:"d" }}</div>
-              <small>{{ event.date|date:"M Y" }}</small>
+              <div class="fw-bold fs-4">{{ event.start_date|date:"d" }}</div>
+              <small>{{ event.start_date|date:"M Y" }}</small>
             </div>
             <div>
               <h5 class="fw-bold mb-1">{{ event.title }}</h5>
               <small class="text-muted"><i class="bi bi-geo-alt me-1"></i>{{ event.location }}</small>
-              {% if event.time %}<br><small class="text-muted"><i class="bi bi-clock me-1"></i>{{ event.time }}</small>{% endif %}
+              {% if event.start_time %}<br><small class="text-muted"><i class="bi bi-clock me-1"></i>{{ event.start_time }}</small>{% endif %}
             </div>
           </div>
           <p class="text-muted small">{{ event.description|truncatewords:20 }}</p>

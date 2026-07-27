@@ -1,9 +1,12 @@
 from django.urls import path
-from . import api_views
+from . import views
 
 urlpatterns = [
-    path('', api_views.DonationListCreateView.as_view(), name='donate'),
-    path('cause/<int:cause_id>/', api_views.DonationListCreateView.as_view(), name='donate_cause'),
-    path('<int:pk>/', api_views.DonationDetailView.as_view(), name='donation_detail'),
-    path('contact/', api_views.ContactSubmissionListCreateView.as_view(), name='contact_list'),
+    path('', views.donation_list, name='donate'),
+    path('checkout/<int:donation_id>/', views.checkout, name='donation_checkout'),
+    path('checkout/success/', views.checkout_success, name='donation_checkout_success'),
+    path('pesapal/callback/', views.pesapal_callback, name='pesapal_callback'),
+    path('contact/', views.contact_view, name='contact'),
+    path('cause/<int:cause_id>/', views.donate_cause, name='donate_cause'),
+    path('<int:pk>/', views.donation_detail, name='donation_detail'),
 ]

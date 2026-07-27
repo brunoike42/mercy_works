@@ -18,7 +18,7 @@
           {% for event in events %}
           <tr>
             <td><strong>{{ event.title }}</strong></td>
-            <td>{{ event.date|date:"M d, Y" }}</td>
+            <td>{{ event.start_date|date:"M d, Y" }}</td>
             <td>{{ event.location }}</td>
             <td><span class="badge bg-{% if event.is_active %}success{% else %}secondary{% endif %}">{% if event.is_active %}Active{% else %}Inactive{% endif %}</span></td>
             <td>

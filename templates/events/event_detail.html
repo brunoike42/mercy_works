@@ -20,8 +20,8 @@
       <div class="card shadow-sm">
         <div class="card-header"><i class="bi bi-calendar-event me-2"></i>Event Details</div>
         <div class="card-body">
-          <p><i class="bi bi-calendar me-2" style="color:var(--mw-primary);"></i><strong>Date:</strong> {{ event.date|date:"F d, Y" }}</p>
-          {% if event.time %}<p><i class="bi bi-clock me-2" style="color:var(--mw-primary);"></i><strong>Time:</strong> {{ event.time }}</p>{% endif %}
+          <p><i class="bi bi-calendar me-2" style="color:var(--mw-primary);"></i><strong>Date:</strong> {{ event.start_date|date:"F d, Y" }}</p>
+          {% if event.start_time %}<p><i class="bi bi-clock me-2" style="color:var(--mw-primary);"></i><strong>Time:</strong> {{ event.start_time }}</p>{% endif %}
           <p><i class="bi bi-geo-alt me-2" style="color:var(--mw-primary);"></i><strong>Location:</strong> {{ event.location }}</p>
           <hr>
           <a href="{% url 'donate' %}" class="btn btn-secondary w-100">

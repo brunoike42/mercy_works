@@ -29,5 +29,3 @@ class Cause(models.Model):
         if self.goal_amount > 0:
             return min(int((self.raised_amount / self.goal_amount) * 100), 100)
         return 0
-    
-    slug = models.SlugField(unique=True, blank=True, default='')

@@ -105,6 +105,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
 DEFAULT_FROM_EMAIL = 'noreply@mercyworks.org.ug'
+ADMINS = [
+    ('Site Admin', os.environ.get('ADMIN_EMAIL', 'admin@mercyworks.org.ug')),
+]
+SERVER_EMAIL = os.environ.get('SERVER_EMAIL', DEFAULT_FROM_EMAIL)
+MANAGERS = ADMINS
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME', ''),
@@ -127,3 +132,6 @@ SWAGGER_SETTINGS = {
     'LOGIN_URL': '/accounts/login/',
     'LOGOUT_URL': '/accounts/logout/',
 }
+
+PESAPAL_API_URL = os.environ.get('PESAPAL_API_URL', 'https://www.pesapal.com/API/PostPesapalDirectOrderV4')
+PESAPAL_CALLBACK_URL = os.environ.get('PESAPAL_CALLBACK_URL', '')
